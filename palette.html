@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AG Glasses</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sass/materialize.css">
+</head>
+
+<body>
+    <div class="setup-container">
+
+        <section class="section">
+            <h5 class="">For what reason do you want to use this extension?</h5>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="">
+                    <input type="radio" name="options" checked>Accessibility
+                </label>
+                <label class="">
+                    <input type="radio" name="options">Comfortability
+                </label>
+            </div>
+            <section id="section2">
+                <h5 class="">Choose your colour palette:</h5>
+                <div class="">
+                    <button type="button" class="" name="head">Background colour
+                        <input type="color" aria-label="Background color" />
+                    </button>
+                    <button type="button" class="">Font colour
+                        <input type="color" aria-label="Font color" />
+                    </button>
+                    <button type="button" class="">Element colour
+                        <input type="color" aria-label="Element colour" />
+                    </button>
+                </div>
+            </section>
+        </section>
+        <button type="submit" class="">Submit</button>
+        <nav aria-label="page navigation">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="impairment.html" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="index.html">1</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="impairment.html">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="palette.html">3</a></li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
