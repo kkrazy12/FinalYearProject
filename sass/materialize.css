@@ -7926,10 +7926,15 @@ input[type=range]::-ms-thumb {
   }
 }
 .setup-container {
-  max-width: 600px;
+  min-width: 600px;
   margin: auto;
   padding: 40px;
   align-self: center;
   display: flex;
   flex-direction: column;
+  background-color: white;
+}
+
+.title-text {
+  font-size: 43px;
 }/*# sourceMappingURL=materialize.css.map */

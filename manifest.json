@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Colour Changer",
+    "version": "1.0",
+    "description": "For accessibility or comfortability, change the background colour of web pages.",
+    "permissions": ["storage"],
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": {
+        "16": "icons/icon16.png"
+      }
+    },
+    "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js", "setup.js"]
+    }],
+    "icons": {
+      "16": "icons/icon16.png"
+    }
+  }
+  
