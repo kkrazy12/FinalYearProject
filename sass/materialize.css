@@ -7932,7 +7932,7 @@ input[type=range]::-ms-thumb {
   align-self: center;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: white !important;
 }
 
 .title-text {
