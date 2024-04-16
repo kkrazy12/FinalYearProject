@@ -1,20 +1,14 @@
-// function applyBackgroundColour(backgroundColor) {
-//   document.body.style.backgroundColor = backgroundColor;
-
-//   const commonElements = document.querySelectorAll('header, footer, main, div, aside');
-//   commonElements.forEach(element => {
-//       element.style.backgroundColor = backgroundColor;
-//   });
-// }
-
 function applyBackgroundColour(backgroundColor) {
   const style = document.createElement('style');
   style.textContent = `
     body, header, nav, footer, main, div, aside {
       background-color: ${backgroundColor} !important;
     }
-    div aside {
+    aside.color-bg-default {
       background-color: ${backgroundColor} !important;
+    }
+    .ssrcss-wcxvp8-StyledContainer.e1f9r9nm2{
+      background-image: none !important;
     }
   `;
   document.head.appendChild(style);
