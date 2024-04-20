@@ -1,18 +1,16 @@
 function applyBackgroundColour(backgroundColor) {
-  const style = document.createElement('style');
-  style.textContent = `
-    body, header, nav, footer, main, div, aside {
-      background-color: ${backgroundColor} !important;
-    }
-    aside.color-bg-default {
-      background-color: ${backgroundColor} !important;
-    }
-    .ssrcss-wcxvp8-StyledContainer.e1f9r9nm2{
-      background-image: none !important;
-    }
-  `;
-  document.head.appendChild(style);
+  const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside');
+  elements.forEach(element => {
+    element.style.setProperty('background-color', backgroundColor, 'important');
+    element.style.setProperty('background-image', 'none', 'important');
+  });
+
+  const defaultBgElements = document.querySelectorAll('aside.color-bg-default');
+  defaultBgElements.forEach(element => {
+    element.style.setProperty('background-color', backgroundColor, 'important');
+  });
 }
+
 
 chrome.storage.sync.get('backgroundColor', ({ backgroundColor }) => {
   if (backgroundColor) {

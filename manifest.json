@@ -3,8 +3,8 @@
     "name": "Colour Changer",
     "version": "1.0",
     "description": "For accessibility or comfortability, change the background colour of web pages.",
-    "permissions": ["storage"],
-    "action": {
+    "permissions": ["storage", "tabs"],
+    "action": { 
       "default_popup": "index.html",
       "default_icon": {
         "16": "icons/icon16.png"
