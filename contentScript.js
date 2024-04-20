@@ -1,28 +1,36 @@
-function applyBackgroundColour(backgroundColor) {
+function applyStyles(backgroundColour, textColour, buttonColour) {
   const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside');
   elements.forEach(element => {
-    element.style.setProperty('background-color', backgroundColor, 'important');
+    element.style.setProperty('background-color', backgroundColour, 'important');
+    element.style.setProperty('color', textColour, 'important');
     element.style.setProperty('background-image', 'none', 'important');
   });
 
-  const defaultBgElements = document.querySelectorAll('aside.color-bg-default');
-  defaultBgElements.forEach(element => {
-    element.style.setProperty('background-color', backgroundColor, 'important');
+  // const defaultBgElements = document.querySelectorAll('aside.color-bg-default');
+  // defaultBgElements.forEach(element => {
+  //   element.style.setProperty('background-color', backgroundColour, 'important');
+  //   element.style.setProperty('color', textColour, 'important');
+  // });
+
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(button => {
+    button.style.setProperty('background-color', buttonColour, 'important');
   });
 }
 
-
-chrome.storage.sync.get('backgroundColor', ({ backgroundColor }) => {
-  if (backgroundColor) {
-      applyBackgroundColour(backgroundColor);
+chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour'], ({ backgroundColour, textColour, buttonColour }) => {
+  if (backgroundColour && textColour && buttonColour) {
+      applyStyles(backgroundColour, textColour, buttonColour);
   }
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
-  if (namespace === 'sync' && changes.backgroundColor) {
-      applyBackgroundColour(changes.backgroundColor.newValue);
+  if (namespace === 'sync' && (changes.backgroundColour || changes.textColour || changes.buttonColour)) {
+      const { backgroundColour, textColour, buttonColour } = changes;
+      applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue);
   }
 });
+
 
 const colourPresets = [
     { name: "Default", value: "#ffffff" }, 

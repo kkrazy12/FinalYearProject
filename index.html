@@ -2,80 +2,87 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AG Glasses</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AG Glasses</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap" rel="stylesheet"> -->
-    <link rel="stylesheet" href="sass/materialize.css">
-    <link href="node_modules/materialize-css/dist/css/materialize.css" rel="stylesheet">
-    <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
+  <link rel="stylesheet" href="sass/materialize.css">
+  <link href="node_modules/materialize-css/dist/css/materialize.css" rel="stylesheet">
+  <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
 
 </head>
 
 <body>
-    <div class="setup-container">
-            <form>
-                <h1 class="flow-text title-text">Welcome to your AG Setup</h1>
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="first_name" type="text" class="validate">
-                  <label for="first_name">First Name</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="last_name" type="text" class="validate">
-                  <label for="last_name">Last Name</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-                  <label class="sr-only" for="disabled">Disabled</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="password" type="password" class="validate">
-                  <label for="password">Password</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input id="email" type="email" class="validate">
-                  <label for="email">Email</label>
-                </div>
-              </div>
-              
-            </form>
+  <div class="setup-container">
+    <form>
+      <h1 class="flow-text title-text">Welcome to your AG Setup</h1>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="first_name" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input disabled value="I am not editable" id="disabled" type="text" class="validate">
+          <label class="sr-only" for="disabled">Disabled</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
 
-            <label class="sr-only" for="color">Choose background color:</label>
-            <input type="color" id="colour" name="color">
-            <button class="btn btn-primary" id="save">Save</button>
+    </form>
 
-            <nav aria-label="page navigation">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="index.html">1<span class="sr-only">(current)</span></a></li>
-                <li class="page-item">
-                    <a class="page-link" href="impairment.html">2</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="palette.html">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="impairment.html">Next</a>
-                </li>
-            </ul>
-        </nav>  
-</div>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
-    <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
-    <script src="contentScript.js"></script>
-    <script src="setup.js"></script>
+    <label class="sr-only" for="color">Choose background color:</label>
+    <input type="color" id="colour" name="color">
+    <button class="btn btn-primary" id="save">Save</button>
+    <br>
+    <label for="textColour">Text Colour:</label>
+    <input type="color" id="textColour" name="textColour">
+
+    <label for="buttonColour">Button Colour:</label>
+    <input type="color" id="buttonColour" name="buttonColour">
+
+    <nav aria-label="page navigation">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="index.html">1<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="impairment.html">2</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="palette.html">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="impairment.html">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+  <script src="contentScript.js"></script>
+  <script src="setup.js"></script>
 </body>
 
 </html>

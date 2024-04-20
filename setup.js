@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const colorInput = document.getElementById('colour');
-    const saveButton = document.getElementById('save');
-  
-    saveButton.addEventListener('click', () => {
-      const colour = colorInput.value;
-      chrome.storage.sync.set({ backgroundColor: colour });
-      document.body.style.backgroundColor = colour;
-    });
-});
+  const colourInput = document.getElementById('colour');
+  const textColourInput = document.getElementById('textColour');
+  const buttonColourInput = document.getElementById('buttonColour');
+  const saveButton = document.getElementById('save');
 
+  saveButton.addEventListener('click', () => {
+    const backgroundColour = colourInput.value;
+    const textColour = textColourInput.value;
+    const buttonColour = buttonColourInput.value;
+    
+    chrome.storage.sync.set({ backgroundColour, textColour, buttonColour });
+    document.body.style.backgroundColor = backgroundColour;
+  });
+});
 
 function selectPreset(presetColour) {
   chrome.storage.sync.set({ selectedPreset: presetColour, backgroundColor: null });
