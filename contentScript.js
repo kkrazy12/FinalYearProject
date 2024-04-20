@@ -1,4 +1,4 @@
-function applyStyles(backgroundColour, textColour, buttonColour) {
+function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
   const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside');
   elements.forEach(element => {
     element.style.setProperty('background-color', backgroundColour, 'important');
@@ -6,28 +6,23 @@ function applyStyles(backgroundColour, textColour, buttonColour) {
     element.style.setProperty('background-image', 'none', 'important');
   });
 
-  // const defaultBgElements = document.querySelectorAll('aside.color-bg-default');
-  // defaultBgElements.forEach(element => {
-  //   element.style.setProperty('background-color', backgroundColour, 'important');
-  //   element.style.setProperty('color', textColour, 'important');
-  // });
-
-  const buttons = document.querySelectorAll('button');
+  const buttons = document.querySelectorAll('button, a');
   buttons.forEach(button => {
     button.style.setProperty('background-color', buttonColour, 'important');
+    button.style.setProperty('color', linkColour, 'important');
   });
 }
 
-chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour'], ({ backgroundColour, textColour, buttonColour }) => {
-  if (backgroundColour && textColour && buttonColour) {
-      applyStyles(backgroundColour, textColour, buttonColour);
+chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
+  if (backgroundColour && textColour && buttonColour && linkColour) {
+      applyStyles(backgroundColour, textColour, buttonColour, linkColour);
   }
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
-  if (namespace === 'sync' && (changes.backgroundColour || changes.textColour || changes.buttonColour)) {
-      const { backgroundColour, textColour, buttonColour } = changes;
-      applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue);
+  if (namespace === 'sync' && (changes.backgroundColour || changes.textColour || changes.buttonColour || changes.linkColour)) {
+      const { backgroundColour, textColour, buttonColour, linkColour } = changes;
+      applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue, linkColour?.newValue);
   }
 });
 

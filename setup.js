@@ -1,16 +1,32 @@
+function applyBackgroundColour(backgroundColor) {
+  const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside');
+  elements.forEach(element => {
+    element.style.setProperty('background-color', backgroundColor, 'important');
+    element.style.setProperty('background-image', 'none', 'important');
+  });
+
+  const defaultBgElements = document.querySelectorAll('aside.color-bg-default');
+  defaultBgElements.forEach(element => {
+    element.style.setProperty('background-color', backgroundColor, 'important');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const colourInput = document.getElementById('colour');
   const textColourInput = document.getElementById('textColour');
   const buttonColourInput = document.getElementById('buttonColour');
+  const linkColourInput = document.getElementById('linkColour');
   const saveButton = document.getElementById('save');
 
   saveButton.addEventListener('click', () => {
     const backgroundColour = colourInput.value;
     const textColour = textColourInput.value;
     const buttonColour = buttonColourInput.value;
-    
-    chrome.storage.sync.set({ backgroundColour, textColour, buttonColour });
+    const linkColour = linkColourInput.value;
+
+    chrome.storage.sync.set({ backgroundColour, textColour, buttonColour, linkColour });
     document.body.style.backgroundColor = backgroundColour;
+    applyBackgroundColour(backgroundColour);
   });
 });
 
@@ -36,4 +52,3 @@ document.querySelectorAll('.preset-btn').forEach(button => {
       selectPreset(presetColour);
   });
 });
-
