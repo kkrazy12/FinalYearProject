@@ -6,26 +6,29 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
     element.style.setProperty('background-image', 'none', 'important');
   });
 
-  const buttons = document.querySelectorAll('button, a');
+  const buttons = document.querySelectorAll('button');
   buttons.forEach(button => {
     button.style.setProperty('background-color', buttonColour, 'important');
-    button.style.setProperty('color', linkColour, 'important');
+  });
+
+  const links = document.querySelectorAll('a');
+  links.forEach(link => {
+    link.style.setProperty('color', linkColour, 'important');
   });
 }
 
 chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
   if (backgroundColour && textColour && buttonColour && linkColour) {
-      applyStyles(backgroundColour, textColour, buttonColour, linkColour);
+    applyStyles(backgroundColour, textColour, buttonColour, linkColour);
   }
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync' && (changes.backgroundColour || changes.textColour || changes.buttonColour || changes.linkColour)) {
-      const { backgroundColour, textColour, buttonColour, linkColour } = changes;
-      applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue, linkColour?.newValue);
+    const { backgroundColour, textColour, buttonColour, linkColour } = changes;
+    applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue, linkColour?.newValue);
   }
 });
-
 
 const colourPresets = [
     { name: "Default", value: "#ffffff" }, 
