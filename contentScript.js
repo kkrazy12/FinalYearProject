@@ -57,14 +57,13 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
   });
 
   let compatibilityPercentage = ((totalElements - incompatibleElements) / totalElements) * 100;
-console.log(compatibilityPercentage);
-  
-  if (compatibilityPercentage === 100) {
-    console.log("This extension will not work on this page.");
-  } else if (compatibilityPercentage < 50) {
-    console.log("There are some elements on this page the extension may not work with.");
-  } else if (compatibilityPercentage < 70) {
-    console.log("This extension is unlikely to work on this website.");
+
+  if (compatibilityPercentage >= 70) {
+    console.log("AG is likely to work well on this website.");
+  } else if (compatibilityPercentage >= 50) {
+    console.log("There are some elements on this page AG may not work with.");
+  } else {
+    console.log("AG will not work properly on this page.");
   }
 }
 
