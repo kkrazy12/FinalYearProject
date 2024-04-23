@@ -1,6 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">  elementsToCheck.forEach(element => {
+  const computedStyle = getComputedStyle(element);
+  const _backgroundColor = computedStyle.backgroundColor;
+  const color = computedStyle.color;
 
+  if (_backgroundColor !== backgroundColour
+    || color !== textColour 
+    || (element.tagName === 'BUTTON' && computedStyle.backgroundColor !== buttonColour) 
+    || (element.tagName === 'A' && computedStyle.color !== linkColour)) {
+      console.log("textcolor: ",color, textColour,
+      "background:", _backgroundColor, backgroundColour)
+    incompatibilityDetected = true;
+    incompatibleElements.push(element);
+  }
+});
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

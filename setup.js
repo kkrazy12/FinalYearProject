@@ -1,4 +1,4 @@
-function applyBackgroundColour(backgroundColor) {
+function applyBackgroundColour(backgroundColor, linkColour) {
   const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside');
   elements.forEach(element => {
     element.style.setProperty('background-color', backgroundColor, 'important');
@@ -9,6 +9,11 @@ function applyBackgroundColour(backgroundColor) {
   defaultBgElements.forEach(element => {
     element.style.setProperty('background-color', backgroundColor, 'important');
   });
+
+  const links = document.querySelectorAll('a');
+  links.forEach(link => {
+    link.style.setProperty('color', linkColour, 'important');
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const linkColourInput = document.getElementById('linkColour');
   const saveButton = document.getElementById('save');
 
+  chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
+    if (backgroundColour) {
+      colourInput.value = backgroundColour;
+    }
+    if (textColour) {
+      textColourInput.value = textColour;
+    }
+    if (buttonColour) {
+      buttonColourInput.value = buttonColour;
+    }
+    if (linkColour) {
+      linkColourInput.value = linkColour;
+    }
+  });
+
   saveButton.addEventListener('click', () => {
     const backgroundColour = colourInput.value;
     const textColour = textColourInput.value;
@@ -26,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     chrome.storage.sync.set({ backgroundColour, textColour, buttonColour, linkColour });
     document.body.style.backgroundColor = backgroundColour;
-    applyBackgroundColour(backgroundColour);
+    applyBackgroundColour(backgroundColour, linkColour);
   });
 });
 
@@ -39,6 +59,7 @@ chrome.storage.sync.get('selectedPreset', ({ selectedPreset }) => {
       applyBackgroundColour(selectedPreset);
   }
 });
+
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync' && changes.selectedPreset) {
