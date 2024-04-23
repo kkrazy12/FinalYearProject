@@ -32,12 +32,11 @@ function hexToRgb(hex) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-
 function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
   const elementsToCheck = document.querySelectorAll('body, header, nav, footer, main, div, aside, article, h1, h2, h3, h4, h5, h6, button, a');
 
-  let incompatibilityDetected = false;
-  let incompatibleElements = [];
+  let totalElements = 0;
+  let incompatibleElements = 0;
 
   elementsToCheck.forEach(element => {
     const computedStyle = getComputedStyle(element);
@@ -46,19 +45,26 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
 
     const expectedBgColor = hexToRgb(backgroundColour);
     const expectedColor = hexToRgb(textColour);
-    const expectedButtonColor = hexToRgb(buttonColour);
-    const expectedLinkColor = hexToRgb(linkColour);
 
-    if (_backgroundColor !== expectedBgColor || color !== expectedColor || (element.tagName === 'BUTTON' && computedStyle.backgroundColor !== expectedButtonColor) || (element.tagName === 'A' && computedStyle.color !== expectedLinkColor)) {
-      console.log("textcolor: ",color, textColour,
-      "background:", _backgroundColor, backgroundColour)
-      incompatibilityDetected = true;
-      incompatibleElements.push(element);
+    if (_backgroundColor !== expectedBgColor || color !== expectedColor) {
+      incompatibleElements++;
+    } else if (element.tagName === 'BUTTON' && computedStyle.backgroundColor !== hexToRgb(buttonColour)) {
+      incompatibleElements++;
+    } else if (element.tagName === 'A' && computedStyle.color !== hexToRgb(linkColour)) {
+      incompatibleElements++;
     }
+    totalElements++;
   });
 
-  if (incompatibilityDetected) {
-    console.log("The extension's styles may not be fully compatible with this website. Incompatible elements:", incompatibleElements);
+  let compatibilityPercentage = ((totalElements - incompatibleElements) / totalElements) * 100;
+console.log(compatibilityPercentage);
+  
+  if (compatibilityPercentage === 100) {
+    console.log("This extension will not work on this page.");
+  } else if (compatibilityPercentage < 50) {
+    console.log("There are some elements on this page the extension may not work with.");
+  } else if (compatibilityPercentage < 70) {
+    console.log("This extension is unlikely to work on this website.");
   }
 }
 
