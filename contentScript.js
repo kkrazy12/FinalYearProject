@@ -80,9 +80,9 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
   }
 });
 
-const colourPresets = [
-    { name: "Default", value: "#ffffff" }, 
-    { name: "Night Mode", value: "#000000" }, 
-    { name: "Ocean Blue", value: "#0080ff" }, 
-    { name: "Forest Green", value: "#228B22" }, 
-];
+// const colourPresets = [
+//   { name: "Default", value: "#ffffff" },
+//   { name: "Night Mode", value: "#000000" },
+//   { name: "Blueeeee", value: "#0080ff", textColour: "#ffffff" },
+//   { name: "green", value: "#228B22", textColour: "#ffffff" },
+// ];
