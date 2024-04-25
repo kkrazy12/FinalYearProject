@@ -5,26 +5,16 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
     element.style.setProperty('color', textColour, 'important');
     element.style.setProperty('background-image', 'none', 'important');
   });
-
-  const defaultBgElements = document.querySelectorAll('aside.color-bg-default');
-  defaultBgElements.forEach(element => {
-    element.style.setProperty('background-color', backgroundColour, 'important');
+  const buttons = document.querySelectorAll('button, input[type="submit"], input[type="reset"]');
+  buttons.forEach(button => {
+    button.style.setProperty('background-color', buttonColour, 'important');
   });
-
   const links = document.querySelectorAll('a');
   links.forEach(link => {
     link.style.setProperty('color', linkColour, 'important');
   });
-
-  const buttons = document.querySelectorAll('button, input');
-  buttons.forEach(button => {
-    button.style.setProperty('background-color', buttonColour, 'important');
-  });
-
   checkStyles(backgroundColour, textColour, buttonColour, linkColour);
 }
-
-
 function hexToRgb(hex) {
   if (!hex) return null;
   //remove the '#' from the hex value
@@ -37,21 +27,16 @@ function hexToRgb(hex) {
   //return as RGB string
   return `rgb(${r}, ${g}, ${b})`;
 }
-
 function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
   const elementsToCheck = document.querySelectorAll('body, header, nav, footer, main, div, aside, article, h1, h2, h3, h4, h5, h6, button, a');
-
   let totalElements = 0;
   let incompatibleElements = 0;
-
   elementsToCheck.forEach(element => {
     const computedStyle = getComputedStyle(element);
     const _backgroundColor = computedStyle.backgroundColor;
     const color = computedStyle.color;
-
     const expectedBgColor = hexToRgb(backgroundColour);
     const expectedColor = hexToRgb(textColour);
-
     if (_backgroundColor !== expectedBgColor || color !== expectedColor) {
       incompatibleElements++;
     } else if (element.tagName === 'BUTTON' && computedStyle.backgroundColor !== hexToRgb(buttonColour)) {
@@ -61,9 +46,7 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
     }
     totalElements++;
   });
-
   let compatibilityPercentage = ((totalElements - incompatibleElements) / totalElements) * 100;
-
   if (compatibilityPercentage >= 70) {
     console.log("AG is likely to work well on this website.");
   } else if (compatibilityPercentage >= 50) {
@@ -72,23 +55,14 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
     console.log("AG will not work properly on this page.");
   }
 }
-
 chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
   if (backgroundColour && textColour && buttonColour && linkColour) {
     applyStyles(backgroundColour, textColour, buttonColour, linkColour);
   }
 });
-
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync' && (changes.backgroundColour || changes.textColour || changes.buttonColour || changes.linkColour)) {
     const { backgroundColour, textColour, buttonColour, linkColour } = changes;
     applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue, linkColour?.newValue);
   }
 });
-
-// const colourPresets = [
-//   { name: "Default", value: "#ffffff" },
-//   { name: "Night Mode", value: "#000000" },
-//   { name: "Blueeeee", value: "#0080ff", textColour: "#ffffff" },
-//   { name: "green", value: "#228B22", textColour: "#ffffff" },
-// ];

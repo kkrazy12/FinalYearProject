@@ -1,10 +1,27 @@
+function applyBackgroundColour(backgroundColor, textColour, buttonColour) {
+  const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside, textarea');
+  elements.forEach(element => {
+    element.style.setProperty('background-color', backgroundColor, 'important');
+    element.style.setProperty('background-image', 'none', 'important');
+    element.style.setProperty('color', textColour, 'important');
+  });
+  const links = document.querySelectorAll('a');
+  links.forEach(link => {
+    link.style.setProperty('color', textColour, 'important');
+  });
+  const buttons = document.querySelectorAll('button, input[type="submit"], input[type="reset"]');
+  buttons.forEach(button => {
+    button.style.setProperty('background-color', buttonColour, 'important');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const colourInput = document.getElementById('colour');
   const textColourInput = document.getElementById('textColour');
   const buttonColourInput = document.getElementById('buttonColour');
   const linkColourInput = document.getElementById('linkColour');
   const saveButton = document.getElementById('save');
-
+  
   chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
     if (backgroundColour) {
       colourInput.value = backgroundColour;
@@ -19,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       linkColourInput.value = linkColour;
     }
   });
-
+  
   saveButton.addEventListener('click', () => {
     const backgroundColour = colourInput.value;
     const textColour = textColourInput.value;
@@ -27,15 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const linkColour = linkColourInput.value;
 
     chrome.storage.sync.set({ backgroundColour, textColour, buttonColour, linkColour });
-    document.body.style.backgroundColor = backgroundColour;
-    applyStyles(backgroundColour, textColour, buttonColour, linkColour);
+    chrome.storage.sync.remove('selectedPreset');
+    applyBackgroundColour(backgroundColour, textColour, buttonColour);
   });
 });
 
 function selectPreset(presetColour, textColour, buttonColour) {
   chrome.storage.sync.set({ selectedPreset: presetColour, selectedTextColour: textColour, selectedButtonColour: buttonColour });
   chrome.storage.sync.remove(['backgroundColour', 'textColour', 'buttonColour', 'linkColour']);
-  //linkColourInput.value = '';
 }
 
 document.querySelectorAll('.preset-btn').forEach(button => {
@@ -49,12 +65,12 @@ document.querySelectorAll('.preset-btn').forEach(button => {
 
 chrome.storage.sync.get(['selectedPreset', 'selectedTextColour', 'selectedButtonColour'], ({ selectedPreset, selectedTextColour, selectedButtonColour }) => {
   if (selectedPreset) {
-    applyStyles(selectedPreset, selectedTextColour, selectedButtonColour);
+    applyBackgroundColour(selectedPreset, selectedTextColour, selectedButtonColour);
   }
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync' && (changes.selectedPreset || changes.selectedTextColour || changes.selectedButtonColour)) {
-    applyStyles(changes.selectedPreset?.newValue, changes.selectedTextColour?.newValue, changes.selectedButtonColour?.newValue);
+    applyBackgroundColour(changes.selectedPreset?.newValue, changes.selectedTextColour?.newValue, changes.selectedButtonColour?.newValue);
   }
 });
