@@ -1,28 +1,3 @@
-// setup.js
-
-function applyBackgroundColour(backgroundColor, textColour, buttonColour) {
-  const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside');
-  elements.forEach(element => {
-    element.style.setProperty('background-color', backgroundColor, 'important');
-    element.style.setProperty('background-image', 'none', 'important');
-  });
-
-  const defaultBgElements = document.querySelectorAll('aside.color-bg-default');
-  defaultBgElements.forEach(element => {
-    element.style.setProperty('background-color', backgroundColor, 'important');
-  });
-
-  const links = document.querySelectorAll('a');
-  links.forEach(link => {
-    link.style.setProperty('color', textColour, 'important');
-  });
-
-  const buttons = document.querySelectorAll('button, input');
-  buttons.forEach(button => {
-    button.style.setProperty('background-color', buttonColour, 'important');
-  });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const colourInput = document.getElementById('colour');
   const textColourInput = document.getElementById('textColour');
@@ -53,32 +28,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     chrome.storage.sync.set({ backgroundColour, textColour, buttonColour, linkColour });
     document.body.style.backgroundColor = backgroundColour;
-    applyBackgroundColour(backgroundColour, textColour, buttonColour);
+    applyStyles(backgroundColour, textColour, buttonColour, linkColour);
   });
 });
 
 function selectPreset(presetColour, textColour, buttonColour) {
   chrome.storage.sync.set({ selectedPreset: presetColour, selectedTextColour: textColour, selectedButtonColour: buttonColour });
   chrome.storage.sync.remove(['backgroundColour', 'textColour', 'buttonColour', 'linkColour']);
+  //linkColourInput.value = '';
 }
 
 document.querySelectorAll('.preset-btn').forEach(button => {
   button.addEventListener('click', () => {
     const presetColour = button.dataset.color;
     const textColour = button.dataset.textcolor || '#000000';
-    const buttonColour = button.dataset.buttoncolor || '#ffffff'; // Fetch button colour data attribute or set default
-    selectPreset(presetColour, textColour, buttonColour); // Pass button colour to selectPreset function
+    const buttonColour = button.dataset.buttoncolor || '#ffffff'; 
+    selectPreset(presetColour, textColour, buttonColour); 
   });
 });
 
 chrome.storage.sync.get(['selectedPreset', 'selectedTextColour', 'selectedButtonColour'], ({ selectedPreset, selectedTextColour, selectedButtonColour }) => {
   if (selectedPreset) {
-    applyBackgroundColour(selectedPreset, selectedTextColour, selectedButtonColour);
+    applyStyles(selectedPreset, selectedTextColour, selectedButtonColour);
   }
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync' && (changes.selectedPreset || changes.selectedTextColour || changes.selectedButtonColour)) {
-    applyBackgroundColour(changes.selectedPreset?.newValue, changes.selectedTextColour?.newValue, changes.selectedButtonColour?.newValue);
+    applyStyles(changes.selectedPreset?.newValue, changes.selectedTextColour?.newValue, changes.selectedButtonColour?.newValue);
   }
 });

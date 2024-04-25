@@ -6,9 +6,9 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
     element.style.setProperty('background-image', 'none', 'important');
   });
 
-  const buttons = document.querySelectorAll('button, input');
-  buttons.forEach(button => {
-    button.style.setProperty('background-color', buttonColour, 'important');
+  const defaultBgElements = document.querySelectorAll('aside.color-bg-default');
+  defaultBgElements.forEach(element => {
+    element.style.setProperty('background-color', backgroundColour, 'important');
   });
 
   const links = document.querySelectorAll('a');
@@ -16,8 +16,14 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
     link.style.setProperty('color', linkColour, 'important');
   });
 
+  const buttons = document.querySelectorAll('button, input');
+  buttons.forEach(button => {
+    button.style.setProperty('background-color', buttonColour, 'important');
+  });
+
   checkStyles(backgroundColour, textColour, buttonColour, linkColour);
 }
+
 
 function hexToRgb(hex) {
   if (!hex) return null;
