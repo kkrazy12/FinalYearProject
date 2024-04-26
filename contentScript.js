@@ -66,3 +66,4 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue, linkColour?.newValue);
   }
 });
+
