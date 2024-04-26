@@ -74,3 +74,46 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     applyBackgroundColour(changes.selectedPreset?.newValue, changes.selectedTextColour?.newValue, changes.selectedButtonColour?.newValue);
   }
 });
+
+
+//On and off toggle
+document.addEventListener('DOMContentLoaded', () => {
+  const onOffToggle = document.getElementById('on-off-toggle');
+
+  chrome.storage.sync.get('extensionEnabled', ({ extensionEnabled }) => {
+    onOffToggle.checked = extensionEnabled;
+  });
+
+  onOffToggle.addEventListener('change', () => {
+    const extensionEnabled = onOffToggle.checked;
+    chrome.storage.sync.set({ extensionEnabled });
+
+    if (extensionEnabled) {
+      
+      applyStoredColorsOrTheme();
+    } else {
+      
+      resetToDefaultColors();
+    }
+  });
+
+  function applyStoredColorsOrTheme() {
+    chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour', 'selectedPreset'], ({ backgroundColour, textColour, buttonColour, linkColour, selectedPreset }) => {
+      if (selectedPreset) {
+        applyBackgroundColour(selectedPreset, textColour, buttonColour);
+      } else if (backgroundColour && textColour && buttonColour && linkColour) {
+        applyBackgroundColour(backgroundColour, textColour, buttonColour);
+      }
+    });
+  }
+
+  function resetToDefaultColors() {
+    const defaultBackground = '#ffffff';
+    const defaultText = '#000000';
+    const defaultButton = '#ffffff';
+    const defaultLink = '#0000ff'; 
+
+    chrome.storage.sync.remove(['backgroundColour', 'textColour', 'buttonColour', 'linkColour', 'selectedPreset']);
+    applyBackgroundColour(defaultBackground, defaultText, defaultButton);
+  }
+});
