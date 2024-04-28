@@ -7925,16 +7925,6 @@ input[type=range]::-ms-thumb {
     margin-top: 1.2rem;
   }
 }
-.setup-container {
-  min-width: 600px;
-  margin: auto;
-  padding: 40px;
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  background-color: white !important;
-}
-
 .title-text {
   font-size: 43px;
 }/*# sourceMappingURL=materialize.css.map */
