@@ -1,26 +1,10 @@
-function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
-  const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside, textarea');
-  elements.forEach(element => {
-    element.style.setProperty('background-color', backgroundColour, 'important');
-    element.style.setProperty('background-image', 'none', 'important');
-    element.style.setProperty('color', textColour, 'important');
-  });
-  const links = document.querySelectorAll('a');
-  links.forEach(link => {
-    link.style.setProperty('color', textColour, 'important');
-  });
-  const buttons = document.querySelectorAll('button, input[type="submit"], input[type="reset"]');
-  buttons.forEach(button => {
-    button.style.setProperty('background-color', buttonColour, 'important');
-  });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const colourInput = document.getElementById('colour');
   const textColourInput = document.getElementById('textColour');
   const buttonColourInput = document.getElementById('buttonColour');
   const linkColourInput = document.getElementById('linkColour');
   const saveButton = document.getElementById('save');
+  const compatibilityText = document.getElementById('compatibilityPercentage');
   
   chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
     if (backgroundColour) {
@@ -35,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (linkColour) {
       linkColourInput.value = linkColour;
     }
-    applyStyles(backgroundColour, textColour, buttonColour, linkColour); 
+    applyStyles(backgroundColour, textColour, buttonColour, linkColour);
   });
   
   saveButton.addEventListener('click', () => {
@@ -163,3 +147,9 @@ document.querySelectorAll('.preset-btn').forEach(button => {
   });
 });
 
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'updateCompatibilityText') {
+    const compatibilityText = document.getElementById('compatibilityPercentage');
+    compatibilityText.innerText = request.compatibilityText;
+  }
+});

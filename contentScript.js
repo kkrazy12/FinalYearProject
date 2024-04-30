@@ -28,6 +28,7 @@ function hexToRgb(hex) {
   //return as RGB string
   return `rgb(${r}, ${g}, ${b})`;
 }
+
 function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
   const elementsToCheck = document.querySelectorAll('body, header, nav, footer, main, div, aside, article, h1, h2, h3, h4, h5, h6, button, a');
   let totalElements = 0;
@@ -48,13 +49,16 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
     totalElements++;
   });
   let compatibilityPercentage = ((totalElements - incompatibleElements) / totalElements) * 100;
+  let compatibilityText = "";
   if (compatibilityPercentage >= 70) {
-    console.log("AG is likely to work well on this website.");
+    compatibilityText = "AG is likely to work well on this website.";
   } else if (compatibilityPercentage >= 50) {
-    console.log("There are some elements on this page AG may not work with.");
+    compatibilityText = "There are some elements on this page AG may not work with.";
   } else {
-    console.log("AG will not work properly on this page.");
+    compatibilityText = "AG will not work properly on this page.";
   }
+
+  chrome.runtime.sendMessage({ action: 'updateCompatibilityText', compatibilityText: compatibilityText });
 }
 
 function removeStyles() {
@@ -63,7 +67,6 @@ function removeStyles() {
     element.removeAttribute('style');
   });
 }
-
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'removeStyles') {
@@ -83,4 +86,3 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue, linkColour?.newValue);
   }
 });
-
