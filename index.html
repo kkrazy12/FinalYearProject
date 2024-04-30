@@ -12,11 +12,27 @@
 <body>
   <div class="container">
     <h1 class="flow-text title-text center-align">Welcome to your AG Setup</h1>
+    <div class="center-align">
     <div class="row">
       <div class="col s12">
-        <span>Refresh warning and explanation here</span>
+        <span>Refresh warning and explanation here and if something isn't looking as it should, pls refresh</span>
       </div>
     </div>
+
+    <div class="row">
+      <div class="switch">
+        <label>
+          Off
+          <input type="checkbox" id="on-off-toggle" aria-label="Extension toggle switch">
+          <span class="lever"></span>
+          On
+        </label>
+      </div>
+      <label for="colour">Choose background color:
+        <input type="color" id="colour" name="color">
+      </label>
+    </div>
+    
     <div class="row">
       <div class="col s12">
         <label for="colour">Choose background color:</label>
@@ -52,19 +68,10 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="switch">
-        <label>
-          Off
-          <input type="checkbox" id="on-off-toggle">
-          <span class="lever"></span>
-          On
-        </label>
-      </div>
-    </div>
-
-    <section class="section 1 mb-4">
-      <h5 class="center-align">If you have a visual impairment, please select it below:</h5>
+   
+  </div>
+    <section class="section 1 mb-4 center-align">
+      <h5>You can choose from our presets here.</h5>
       <div class="row">
         <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#ffffff"
           data-textcolor="#000000" data-buttoncolor="#f5f5f5">Default</button>

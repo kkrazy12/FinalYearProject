@@ -15,6 +15,7 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
   });
   checkStyles(backgroundColour, textColour, buttonColour, linkColour);
 }
+
 function hexToRgb(hex) {
   if (!hex) return null;
   //remove the '#' from the hex value
@@ -55,11 +56,27 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
     console.log("AG will not work properly on this page.");
   }
 }
+
+function removeStyles() {
+  const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside, article, h1, h2, h3, h4, h5, h6, button, input, a');
+  elements.forEach(element => {
+    element.removeAttribute('style');
+  });
+}
+
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'removeStyles') {
+    removeStyles();
+  }
+});
+
 chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
   if (backgroundColour && textColour && buttonColour && linkColour) {
     applyStyles(backgroundColour, textColour, buttonColour, linkColour);
   }
 });
+
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync' && (changes.backgroundColour || changes.textColour || changes.buttonColour || changes.linkColour)) {
     const { backgroundColour, textColour, buttonColour, linkColour } = changes;
