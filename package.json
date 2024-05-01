@@ -12,5 +12,8 @@
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
     "materialize-css": "^1.0.0-rc.2"
+  },
+  "devDependencies": {
+    "prettier": "3.2.5"
   }
 }

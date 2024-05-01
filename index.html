@@ -7,17 +7,37 @@
   <title>AG Glasses</title>
   <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="sass/materialize.css">
 </head>
 
 <body>
   <div class="container">
+    <div class="row">
+      <div class="col-12">
     <h1 class="flow-text title-text center-align">Welcome to your AG Setup</h1>
+    </div>
+    <div class="col-12 center-align">
+    <a class="material-icons modal-trigger pulse-button" data-target="modal1">announcement</a>
+  </div>
+  </div>
+  </div>
     <div class="center-align">
     <div class="row">
       <div class="col s12">
         <span>Refresh warning and explanation here and if something isn't looking as it should, pls refresh</span>
       </div>
     </div>
+
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+          
 
     <div class="row">
       <div class="switch">

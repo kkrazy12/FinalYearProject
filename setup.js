@@ -153,3 +153,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     compatibilityText.innerText = request.compatibilityText;
   }
 });
+
+//modal trigger fuction
+document.addEventListener('DOMContentLoaded', function () {
+  var modals = document.querySelectorAll('.modal');
+  M.Modal.init(modals);
+});
