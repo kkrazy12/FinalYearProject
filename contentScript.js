@@ -17,11 +17,19 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
   //targeting my annoucement button
   const announcementButton = document.getElementById('announcement');
   if (announcementButton) {
-    announcementButton.style.setProperty('color', textColour, 'important');
+    announcementButton.style.setProperty('color', textColour, 'important'); 
+    announcementButton.style.setProperty('background-color', buttonColour, 'important');
   }
+  
+  //forgot to add labels
+  const labels = document.querySelectorAll('label');
+  labels.forEach(label => {
+    label.style.setProperty('color', textColour, 'important');
+  });
   
   checkStyles(backgroundColour, textColour, buttonColour, linkColour);
 }
+
 
 
 function hexToRgb(hex) {

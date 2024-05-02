@@ -7926,11 +7926,28 @@ input[type=range]::-ms-thumb {
   }
 }
 .title-text {
-  font-size: 43px;
+  font-size: 30px;
 }
 
 .pl-2 {
   padding-left: 10px;
+}
+
+p {
+  font-size: 14px;
+}
+
+label {
+  font-size: 14px;
+  color: black;
+  padding-right: 10px;
+}
+
+ul:not(.browser-default) > li {
+  list-style-type: disc;
+  font-size: 16px;
+  padding: 12px 0px 5px 0px;
+  text-align: left;
 }
 
 .pulse-button {
@@ -7954,4 +7971,12 @@ input[type=range]::-ms-thumb {
   100% {
     transform: scale(1);
   }
+}
+#compatibility-text {
+  font-size: 14px;
+  padding: 10px 0px 10px 0px;
+}
+
+.preset-btn {
+  margin: 5px;
 }/*# sourceMappingURL=materialize.css.map */
