@@ -5,7 +5,7 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
     element.style.setProperty('color', textColour, 'important');
     element.style.setProperty('background-image', 'none', 'important');
   });
-  const buttons = document.querySelectorAll('button, input[type="submit"], input[type="reset"]');
+  const buttons = document.querySelectorAll('button, input[type="submit"], input[type="reset"], .btn, .modal-trigger');
   buttons.forEach(button => {
     button.style.setProperty('background-color', buttonColour, 'important');
   });
@@ -13,8 +13,16 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
   links.forEach(link => {
     link.style.setProperty('color', linkColour, 'important');
   });
+  
+  //targeting my annoucement button
+  const announcementButton = document.getElementById('announcement');
+  if (announcementButton) {
+    announcementButton.style.setProperty('color', textColour, 'important');
+  }
+  
   checkStyles(backgroundColour, textColour, buttonColour, linkColour);
 }
+
 
 function hexToRgb(hex) {
   if (!hex) return null;
