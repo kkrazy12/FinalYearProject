@@ -59,7 +59,7 @@
 }
 
 p {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 label {
@@ -86,7 +86,6 @@ ul:not(.browser-default) > li {
   color: black;
 }
 
-
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -99,11 +98,19 @@ ul:not(.browser-default) > li {
   }
 }
 
-#compatibility-text{
+#compatibility-text {
   font-size: 14px;
-    padding: 10px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
 }
 
-.preset-btn{
+.preset-btn {
   margin: 5px;
+}
+
+#announcement {
+  color: #00838f;
+}
+
+.dropdown-trigger{
+  width: 100%;
 }

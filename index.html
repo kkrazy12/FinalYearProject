@@ -55,48 +55,35 @@
       </div>
       </div>
     
-    
-    <div class="row">
-      <div class="col s12">
-        <label for="colour">Choose background color:</label>
-        <input type="color" id="colour" name="color">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col s12">
-        <label for="textColour">Text Colour:</label>
-        <input type="color" id="textColour" name="textColour">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col s12">
-        <label for="buttonColour">Button Colour:</label>
+      <ul class="collapsible">
+        <li>
+          <div class="collapsible-header">Customise your colours:</div>
+          <div class="collapsible-body">
+<div>
+            <label for="colour">background colour:</label>
+            <input type="color" id="colour" name="color">
+          </div>
+          <div>
+            <label for="textColour">Text Colour:</label>
+            <input type="color" id="textColour" name="textColour">
+          </div>
+<div>
+            <label for="buttonColour">Button Colour:</label>
         <input type="color" id="buttonColour" name="buttonColour">
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col s12">
+      <div>
         <label for="linkColour">Link Colour:</label>
         <input type="color" id="linkColour" name="linkColor">
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col s12">
-        <button class="btn waves-effect waves-light" type="submit" name="action" id="save">Save<i
-            class="material-icons right">save</i></button>
-      </div>
-    </div>
-
-   
-  </div>
-    <section class="section 1 mb-4 center-align">
-      <h5>You can choose from our presets here.</h5>
-      <div class="row">
-        <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#ffffff"
+      <button class="btn waves-effect waves-light" type="submit" name="action" id="save">Save<i
+        class="material-icons right">save</i></button>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">Choose a theme:</div>
+          <div class="collapsible-body">
+            <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#ffffff"
           data-textcolor="#000000" data-buttoncolor="#f5f5f5">Default</button>
         <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#000000"
           data-textcolor="#ffffff" data-buttoncolor="#333333">Night Mode</button>
@@ -108,9 +95,14 @@
           data-textcolor="#000080" data-buttoncolor="#99ccff">Blue Light Reduction</button>
         <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#f0fff0"
           data-textcolor="#006400" data-buttoncolor="#ccffcc">Green Light Reduction</button>
-      </div>
-    </section>
-
+          </div>
+        </li>
+      
+      </ul>
+            
+   
+  </div>
+    
 
   </div>
 

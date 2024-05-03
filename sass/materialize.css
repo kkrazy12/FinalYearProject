@@ -7934,7 +7934,7 @@ input[type=range]::-ms-thumb {
 }
 
 p {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 label {
@@ -7979,4 +7979,12 @@ ul:not(.browser-default) > li {
 
 .preset-btn {
   margin: 5px;
+}
+
+#announcement {
+  color: #00838f;
+}
+
+.dropdown-trigger {
+  width: 100%;
 }/*# sourceMappingURL=materialize.css.map */
