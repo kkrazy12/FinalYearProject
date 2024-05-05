@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
 function selectPreset(presetColour, textColour, buttonColour) {
   chrome.storage.sync.set({ selectedPreset: presetColour, selectedTextColour: textColour, selectedButtonColour: buttonColour });
   chrome.storage.sync.remove(['backgroundColour', 'textColour', 'buttonColour', 'linkColour']);
@@ -160,7 +161,20 @@ document.addEventListener('DOMContentLoaded', function () {
   M.Modal.init(modals);
 });
 
+//collapsible dropdown content
 document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.collapsible');
   var instances = M.Collapsible.init(elems);
+});
+
+//for carets on collapsibles
+$(function() {
+  $('.collapsible').collapsible({
+    onOpenEnd: function(el) {
+      $(el).find('.material-icons.right.caret').text('keyboard_arrow_up');
+    },
+    onCloseEnd: function(el) {
+      $(el).find('.material-icons.right.caret').text('keyboard_arrow_down');
+    }
+  });
 });
