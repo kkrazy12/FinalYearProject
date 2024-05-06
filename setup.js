@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttonColourInput = document.getElementById('buttonColour');
   const linkColourInput = document.getElementById('linkColour');
   const saveButton = document.getElementById('save');
+  const saveCustomButton = document.getElementById('saveCustom');
   const compatibilityText = document.getElementById('compatibilityPercentage');
-  
+  const customThemeBtn = document.querySelector('.custom-theme-btn'); 
+
   chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
     if (backgroundColour) {
       colourInput.value = backgroundColour;
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (linkColour) {
       linkColourInput.value = linkColour;
     }
-    applyStyles(backgroundColour, textColour, buttonColour, linkColour); 
+    // applyStyles(backgroundColour, textColour, buttonColour, linkColour); 
   });
   
   saveButton.addEventListener('click', () => {
@@ -32,7 +34,46 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.remove('selectedPreset');
     applyStyles(backgroundColour, textColour, buttonColour, linkColour); 
   });
+
+  saveCustomButton.addEventListener('click', () => {
+    const backgroundColour = colourInput.value;
+    const textColour = textColourInput.value;
+    const buttonColour = buttonColourInput.value;
+    const linkColour = linkColourInput.value;
+  
+    chrome.storage.sync.set({ customTheme: { backgroundColour, textColour, buttonColour, linkColour } }, () => {
+      chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          action: 'applyCustomTheme',
+          backgroundColour,
+          textColour,
+          buttonColour,
+          linkColour
+        });
+      });
+    });
+  });
+  
+
+  customThemeBtn.addEventListener('click', () => {
+    chrome.storage.sync.get('customTheme', ({ customTheme }) => {
+      if (customTheme) {
+        const { backgroundColour, textColour, buttonColour, linkColour } = customTheme;
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+          chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'applyCustomTheme',
+            backgroundColour,
+            textColour,
+            buttonColour,
+            linkColour
+          });
+        });
+      }
+    });
+  });
+  
 });
+
 
 function selectPreset(presetColour, textColour, buttonColour, linkColour) {
   linkColour = linkColour || '#0000ff'; 

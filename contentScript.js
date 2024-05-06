@@ -34,8 +34,6 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
   checkStyles(backgroundColour, textColour, buttonColour, linkColour);
 }
 
-
-
 function hexToRgb(hex) {
   if (!hex) return null;
   //remove the '#' from the hex value
@@ -91,6 +89,8 @@ function removeStyles() {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'removeStyles') {
     removeStyles();
+  } else if (request.action === 'applyCustomTheme') {
+    applyStyles(request.backgroundColour, request.textColour, request.buttonColour, request.linkColour);
   }
 });
 
