@@ -1,4 +1,5 @@
 function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
+  console.log("Link Colour in applyStyles:", linkColour); 
   const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside, article, h1, h2, h3, h4, h5, h6');
   elements.forEach(element => {
     element.style.setProperty('background-color', backgroundColour, 'important');
@@ -8,13 +9,16 @@ function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
   const buttons = document.querySelectorAll('button, input[type="submit"], input[type="reset"], .btn, .modal-trigger');
   buttons.forEach(button => {
     button.style.setProperty('background-color', buttonColour, 'important');
+    button.style.color = textColour;
   });
+
+
   const links = document.querySelectorAll('a');
   links.forEach(link => {
     link.style.setProperty('color', linkColour, 'important');
   });
   
-  //targeting my annoucement button
+  //targeting my announement button
   const announcementButton = document.getElementById('announcement');
   if (announcementButton) {
     announcementButton.style.setProperty('color', textColour, 'important'); 

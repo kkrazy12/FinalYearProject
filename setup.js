@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (linkColour) {
       linkColourInput.value = linkColour;
     }
-    applyStyles(backgroundColour, textColour, buttonColour, linkColour);
+    applyStyles(backgroundColour, textColour, buttonColour, linkColour); 
   });
   
   saveButton.addEventListener('click', () => {
@@ -34,30 +34,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-function selectPreset(presetColour, textColour, buttonColour) {
-  chrome.storage.sync.set({ selectedPreset: presetColour, selectedTextColour: textColour, selectedButtonColour: buttonColour });
+function selectPreset(presetColour, textColour, buttonColour, linkColour) {
+  linkColour = linkColour || '#0000ff'; 
+  chrome.storage.sync.set({ 
+    selectedPreset: presetColour, 
+    selectedTextColour: textColour, 
+    selectedButtonColour: buttonColour, 
+    selectedLinkColour: linkColour 
+  });
   chrome.storage.sync.remove(['backgroundColour', 'textColour', 'buttonColour', 'linkColour']);
+  applyStyles(presetColour, textColour, buttonColour, linkColour); 
 }
 
 document.querySelectorAll('.preset-btn').forEach(button => {
   button.addEventListener('click', () => {
     const presetColour = button.dataset.color;
     const textColour = button.dataset.textcolor || '#000000';
-    const buttonColour = button.dataset.buttoncolor || '#ffffff'; 
-    selectPreset(presetColour, textColour, buttonColour); 
+    const buttonColour = button.dataset.buttoncolor || '#ffffff';
+    const linkColour = button.dataset.linkcolor || '#0000ff';
+
+    selectPreset(presetColour, textColour, buttonColour, linkColour); 
   });
 });
 
-chrome.storage.sync.get(['selectedPreset', 'selectedTextColour', 'selectedButtonColour'], ({ selectedPreset, selectedTextColour, selectedButtonColour }) => {
+chrome.storage.sync.get(['selectedPreset', 'selectedTextColour', 'selectedButtonColour', 'selectedLinkColour'], ({ selectedPreset, selectedTextColour, selectedButtonColour, selectedLinkColour }) => {
   if (selectedPreset) {
-    applyStyles(selectedPreset, selectedTextColour, selectedButtonColour);
+    applyStyles(selectedPreset, selectedTextColour, selectedButtonColour, selectedLinkColour);
   }
 });
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
-  if (namespace === 'sync' && (changes.selectedPreset || changes.selectedTextColour || changes.selectedButtonColour)) {
-    applyStyles(changes.selectedPreset?.newValue, changes.selectedTextColour?.newValue, changes.selectedButtonColour?.newValue);
+  if (namespace === 'sync' && (changes.selectedPreset || changes.selectedTextColour || changes.selectedButtonColour || changes.selectedLinkColour)) {
+    applyStyles(changes.selectedPreset?.newValue, changes.selectedTextColour?.newValue, changes.selectedButtonColour?.newValue, changes.selectedLinkColour?.newValue);
   }
 });
 
@@ -87,11 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function applyStoredColorsOrTheme() {
+    const onOffToggle = document.getElementById('on-off-toggle');
     chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour', 'selectedPreset'], ({ backgroundColour, textColour, buttonColour, linkColour, selectedPreset }) => {
       if (selectedPreset) {
         applyStyles(backgroundColour, textColour, buttonColour, linkColour);
       } else if (backgroundColour && textColour && buttonColour && linkColour) {
         applyStyles(backgroundColour, textColour, buttonColour, linkColour);
+      }
+      if (!onOffToggle.checked && (backgroundColour || textColour || buttonColour || linkColour)) {
+        onOffToggle.checked = true; //be true when colours are applied
+        chrome.storage.sync.set({ extensionEnabled: true });
       }
     });
   }
@@ -110,23 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-document.addEventListener('DOMContentLoaded', applyStoredColorsOrTheme);
-
-function applyStoredColorsOrTheme() {
-  const onOffToggle = document.getElementById('on-off-toggle');
-  chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour', 'selectedPreset'], ({ backgroundColour, textColour, buttonColour, linkColour, selectedPreset }) => {
-    if (selectedPreset) {
-      applyStyles(backgroundColour, textColour, buttonColour, linkColour);
-    } else if (backgroundColour && textColour && buttonColour && linkColour) {
-      applyStyles(backgroundColour, textColour, buttonColour, linkColour);
-    }
-    if (!onOffToggle.checked && (backgroundColour || textColour || buttonColour || linkColour)) {
-      onOffToggle.checked = true; //be true when colours are applied
-      chrome.storage.sync.set({ extensionEnabled: true });
-    }
-  });
-}
 
 document.querySelectorAll('input[type="color"]').forEach(input => {
   input.addEventListener('input', () => {
@@ -155,7 +151,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-//modal trigger fuction
+//modal trigger function
 document.addEventListener('DOMContentLoaded', function () {
   var modals = document.querySelectorAll('.modal');
   M.Modal.init(modals);
