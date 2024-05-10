@@ -1,52 +1,59 @@
+//apply styles to the webpage
 function applyStyles(backgroundColour, textColour, buttonColour, linkColour) {
-  console.log("Link Colour in applyStyles:", linkColour); 
+  //selecting the elements I want to apply styles to
   const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside, article, h1, h2, h3, h4, h5, h6');
+  //for each of my elements (above array) set styles 
   elements.forEach(element => {
     element.style.setProperty('background-color', backgroundColour, 'important');
     element.style.setProperty('color', textColour, 'important');
     element.style.setProperty('background-image', 'none', 'important');
   });
+  //selecting buttons, inputs etc to apply styles to
   const buttons = document.querySelectorAll('button, input[type="submit"], input[type="reset"], .btn, .modal-trigger');
+  //selecting buttons to apply styles to
   buttons.forEach(button => {
     button.style.setProperty('background-color', buttonColour, 'important');
     button.style.color = textColour;
   });
 
-
+  //selecting links to apply styles
   const links = document.querySelectorAll('a');
   links.forEach(link => {
     link.style.setProperty('color', linkColour, 'important');
   });
   
-  //targeting my announement button
+  //specifically applying styles to my announcement button
   const announcementButton = document.getElementById('announcement');
   if (announcementButton) {
     announcementButton.style.setProperty('color', textColour, 'important'); 
     announcementButton.style.setProperty('background-color', buttonColour, 'important');
   }
   
-  //forgot to add labels
+  //applying styles to labels
   const labels = document.querySelectorAll('label');
   labels.forEach(label => {
     label.style.setProperty('color', textColour, 'important');
   });
   
+  //calling checkStyles function - checking the compatibility of the applied styles against the webpage
   checkStyles(backgroundColour, textColour, buttonColour, linkColour);
 }
 
+// Function to convert hex color codes to RGB
 function hexToRgb(hex) {
   if (!hex) return null;
-  //remove the '#' from the hex value
+  // Remove the '#' from the hex value
   hex = hex.replace('#', '');
-  //parse hex to RGB
+  // Parse hex to RGB
   const bigint = parseInt(hex, 16);
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
-  //return as RGB string
+  // Return as RGB string
   return `rgb(${r}, ${g}, ${b})`;
 }
 
+//checkStyles function checks the compatibility of the applied styles against the current URL
 function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
   const elementsToCheck = document.querySelectorAll('body, header, nav, footer, main, div, aside, article, h1, h2, h3, h4, h5, h6, button, a');
   let totalElements = 0;
@@ -76,9 +83,11 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
     compatibilityText = "AG will not work properly on this page.";
   }
 
+  //send message to update compatibility text
   chrome.runtime.sendMessage({ action: 'updateCompatibilityText', compatibilityText: compatibilityText });
 }
 
+//remove styles 
 function removeStyles() {
   const elements = document.querySelectorAll('body, header, nav, footer, main, div, aside, article, h1, h2, h3, h4, h5, h6, button, input, a');
   elements.forEach(element => {
@@ -86,23 +95,25 @@ function removeStyles() {
   });
 }
 
+//listen for if a custom theme is chosen and apply styles
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'removeStyles') {
-    removeStyles();
-  } else if (request.action === 'applyCustomTheme') {
+  if (request.action === 'applyCustomTheme') {
     applyStyles(request.backgroundColour, request.textColour, request.buttonColour, request.linkColour);
   }
 });
 
+//applying stored theme colours
 chrome.storage.sync.get(['backgroundColour', 'textColour', 'buttonColour', 'linkColour'], ({ backgroundColour, textColour, buttonColour, linkColour }) => {
   if (backgroundColour && textColour && buttonColour && linkColour) {
     applyStyles(backgroundColour, textColour, buttonColour, linkColour);
   }
 });
-
+//listen for any changes to colours and apply
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (namespace === 'sync' && (changes.backgroundColour || changes.textColour || changes.buttonColour || changes.linkColour)) {
     const { backgroundColour, textColour, buttonColour, linkColour } = changes;
     applyStyles(backgroundColour?.newValue, textColour?.newValue, buttonColour?.newValue, linkColour?.newValue);
   }
 });
+
+

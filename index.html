@@ -1,121 +1,245 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OptiTone</title>
+    <link
+      rel="stylesheet"
+      href="node_modules/materialize-css/dist/css/materialize.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="sass/materialize.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="flow-text title-text center-align">
+            Welcome to your OptiTone Setup
+          </h1>
+        </div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AG Glasses</title>
-  <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="sass/materialize.css">
-</head>
-
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-    <h1 class="flow-text title-text center-align">Welcome to your AG Setup</h1>
+        <!--Announcement button -->
+        <div class="col-12 center-align">
+          <a
+            class="material-icons modal-trigger pulse-button"
+            id="announcement"
+            data-target="modal1"
+            tabindex="0"
+            >announcement</a
+          >
+        </div>
+      </div>
     </div>
-    <div class="col-12 center-align">
-    <a class="material-icons modal-trigger pulse-button" id="announcement" data-target="modal1">announcement</a>
-  </div>
-  </div>
-  </div>
+
+    <!--How to use the extension modal popup-->
     <div class="center-align">
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>How to use OptiTone:</h4>
+          <ul class="pl-2">
+            <li>
+              Once you choose a colour from one of the inputs, make sure to
+              click save to see the effects.
+            </li>
+            <li>
+              Please see the compatibility state underneath the on/off toggle.
+              It will tell you how well the extension will work with the current
+              website.
+            </li>
+            <li>
+              If colours are not being applied or the website doesn't look the
+              way it should, please refresh the website.
+            </li>
+            <li>
+              You can turn the colours on or off at any time by using the toggle
+            </li>
+            <li>
+              Most of the errors you experience can be resolved by refreshing
+              the web page!
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" tabindex="0" class="modal-close waves-effect waves-green btn cyan darken-3">Okay</a>
+        </div>
+      </div>
 
-    <div id="modal1" class="modal">
-      <div class="modal-content">
-        <h4>How to use AG:</h4>
-        <ul class="pl-2">
-          <li>Once you choose a colour from one of the inputs, make sure to click save to see the effects.</li>
-          <li>Please see the compatibility state underneath the on/off toggle. It will tell you how well the extension will work with the current website.</li>
-          <li>If colours are not being applied or the website doesn't look the way it should, please refresh the wesbite.</li>
-          <li>You can turn the colours on or off at any time by using the toggle</li>
-          <li>Most of the errors you experience can be resolved by refreshing the web page!</li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn">Okay!</a>
-      </div>
-    </div>
-          <div class="row pt-2">
-      <div class="switch">
-        <label>
-          Off
-          <input type="checkbox" id="on-off-toggle" aria-label="Extension toggle switch">
-          <span class="lever"></span>
-          On
-        </label>
-      </div>
-    </div>
-
+      <!--On and Off toggle-->
       <div class="row pt-2">
-      <div id="compatibility-text">
-        Compatibility: <span id="compatibilityPercentage">N/A</span>
+        <div class="switch">
+          <label>
+            Off
+            <input
+              type="checkbox"
+              id="on-off-toggle"
+              aria-label="Extension toggle switch"
+            />
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
       </div>
+
+      <!--Compatibility message-->
+      <div class="row pt-2">
+        <div id="compatibility-text">
+          Compatibility: <span id="compatibilityPercentage">N/A</span>
+        </div>
       </div>
-    
+
       <ul class="collapsible">
         <li>
-          <div class="collapsible-header center-align"><span>Customise your colours<i class="small material-icons right caret">keyboard_arrow_down</i></span></div>
+          <!--Customise your colours section-->
+          <div class="collapsible-header center-align">
+            <span
+              >Customise Your Colours<i class="small material-icons right caret"
+                >keyboard_arrow_down</i
+              ></span
+            >
+          </div>
           <div class="collapsible-body center-align">
-<div class="colour-inputs">
-            <label for="colour">Background colour:</label>
-            <input type="color" id="colour" name="color">
-          </div>
-          <div class="colour-inputs">
-            <label for="textColour">Text Colour:</label>
-            <input type="color" id="textColour" name="textColour">
-          </div>
-<div class="colour-inputs">
-            <label for="buttonColour">Button Colour:</label>
-        <input type="color" id="buttonColour" name="buttonColour">
-      </div>
-      <div class="colour-inputs">
-        <label for="linkColour">Link Colour:</label>
-        <input type="color" id="linkColour" name="linkColor">
-      </div>
+            <!--Colour inputs start here-->
+            <div class="colour-inputs">
+              <label for="colour">Background colour:</label>
+              <input type="color" id="colour" name="color" />
+            </div>
+            <div class="colour-inputs">
+              <label for="textColour">Text Colour:</label>
+              <input type="color" id="textColour" name="textColour" />
+            </div>
+            <div class="colour-inputs">
+              <label for="buttonColour">Button Colour:</label>
+              <input type="color" id="buttonColour" name="buttonColour" />
+            </div>
+            <div class="colour-inputs">
+              <label for="linkColour">Link Colour:</label>
+              <input type="color" id="linkColour" name="linkColor" />
+            </div>
 
-      <button class="btn waves-effect waves-light mt-2" type="submit" name="action" id="save">Save<i
-        class="material-icons right">save</i></button>
+            <!--Apply the styles button-->
+            <button
+              class="btn waves-effect waves-light cyan darken-3 mt-2"
+              type="submit"
+              name="action"
+              id="save"
+              tabindex="0"
+            >
+              Apply<i class="material-icons right">save</i>
+            </button>
 
-        <button class="btn waves-effect waves-light mt-2" id="saveCustom">Save Custom Theme<i
-          class="material-icons right">save</i></button>
+            <!--Custom themes section-->
+            <div class="custom-themes pt-4">
+              <label for="themeName">Theme Name:</label>
+              <input
+                type="text"
+                id="themeName"
+                name="themeName"
+                tabindex="0"
+                placeholder="Enter theme name"
+              />
+              <!--Save a custom theme button-->
+              <button
+                class="btn waves-effect waves-light cyan darken-3 mt-2"
+                id="saveNamedCustom"
+              >
+                Save As A Theme<i class="material-icons right">save</i>
+              </button>
+            </div>
           </div>
         </li>
         <li>
-          <div class="collapsible-header center-align"><span>Choose a theme<i class="small material-icons right caret">keyboard_arrow_down</i></span></div>
+          <!--Choose a theme section-->
+          <div class="collapsible-header center-align">
+            <span
+              >Choose A Theme<i class="small material-icons right caret"
+                >keyboard_arrow_down</i
+              ></span
+            >
+          </div>
           <div class="collapsible-body center-align">
-            <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#ffffff"
-          data-textcolor="#000000" data-buttoncolor="#f5f5f5" data-linkcolor="#0000ff">Default</button>
-
-          <button class="custom-theme-btn btn preset-btn waves-effect waves-light">Custom Theme</button>
-
-        <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#000000"
-          data-textcolor="#ffffff" data-buttoncolor="#333333" data-linkcolor="#ffffff">Night Mode</button>
-        <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#f2f2f2"
-          data-textcolor="#000000" data-buttoncolor="#f2f2f2" data-linkcolor="#0000ff">Low Light</button>
-        <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#000000"
-          data-textcolor="#ffff00" data-buttoncolor="#ff6600" data-linkcolor="#ff0000">High Light</button>
-        <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#fffff0"
-          data-textcolor="#000080" data-buttoncolor="#99ccff" data-linkcolor="#00ff00">Blue Light Reduction</button>
-        <button type="button" class="btn preset-btn waves-effect waves-light" data-color="#f0fff0"
-          data-textcolor="#006400" data-buttoncolor="#ccffcc" data-linkcolor="#ffff00">Green Light Reduction</button>
+            <button
+              type="button"
+              class="btn preset-btn waves-effect waves-light cyan darken-3"
+              data-color="#ffffff"
+              data-textcolor="#000000"
+              data-buttoncolor="#f5f5f5"
+              data-linkcolor="#0000ff"
+            >
+              Default
+            </button>
+            <button
+              type="button"
+              class="btn preset-btn waves-effect waves-light cyan darken-3"
+              data-color="#000000"
+              data-textcolor="#ffffff"
+              data-buttoncolor="#333333"
+              data-linkcolor="#ffffff"
+            >
+              Night Mode
+            </button>
+            <button
+              type="button"
+              class="btn preset-btn waves-effect waves-light cyan darken-3"
+              data-color="#f2f2f2"
+              data-textcolor="#000000"
+              data-buttoncolor="#f2f2f2"
+              data-linkcolor="#0000ff"
+            >
+              Low Light
+            </button>
+            <button
+              type="button"
+              class="btn preset-btn waves-effect waves-light cyan darken-3"
+              data-color="#000000"
+              data-textcolor="#ffff00"
+              data-buttoncolor="#ff6600"
+              data-linkcolor="#ff0000"
+            >
+              High Light
+            </button>
+            <button
+              type="button"
+              class="btn preset-btn waves-effect waves-light cyan darken-3"
+              data-color="#f0f8ff"
+              data-textcolor="#000080"
+              data-buttoncolor="#99ccff"
+              data-linkcolor="#00ff00"
+            >
+              Blue Light Reduction
+            </button>
+            <button
+              type="button"
+              class="btn preset-btn waves-effect waves-light cyan darken-3"
+              data-color="#f0fff0"
+              data-textcolor="#006400"
+              data-buttoncolor="#ccffcc"
+              data-linkcolor="#ffff00"
+            >
+              Green Light Reduction
+            </button>
           </div>
         </li>
-      
+        <li>
+          <!-- My Saved Themes section -->
+          <div class="saved-themes collapsible-header center-align">
+            My Saved Themes<i class="small material-icons right caret"
+              >keyboard_arrow_down</i
+            >
+          </div>
+          <!--user can find their saved custom themes here-->
+          <div class="collapsible-body center-align" id="savedThemes"></div>
+        </li>
       </ul>
-            
-   
-  </div>
-    
+    </div>
 
-  </div>
-
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
-  <script src="contentScript.js"></script>
-  <script src="setup.js"></script>
-</body>
-
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="contentScript.js"></script>
+    <script src="setup.js"></script>
+  </body>
 </html>

@@ -10,6 +10,10 @@
   padding-top: 10px;
 }
 
+.pt-4 {
+  padding-top: 40px;
+}
+
 .mt-2 {
   margin-top: 20px;
 }
@@ -40,6 +44,10 @@ ul:not(.browser-default) > li {
   font-size: 40px;
   animation: pulse 1s infinite;
   color: black;
+}
+
+.pulse-button.clicked {
+  animation: none;
 }
 
 @keyframes pulse {
@@ -79,4 +87,24 @@ ul:not(.browser-default) > li {
 }
 .collapsible-header i {
   font-size: 35px;
+}
+
+#themeName {
+  padding-top: 15px;
+}
+
+input[type=text]:active,
+button:active {
+  outline: none;
+}
+
+a:focus, .toggle-focus,
+input[type=text]:focus,
+input:focus,
+button:focus,
+li:focus,
+.collapsible-focus {
+  outline: none;
+  border: 2px solid black;
+  box-shadow: 0 0 5px grey;
 }/*# sourceMappingURL=materialize.css.map */
