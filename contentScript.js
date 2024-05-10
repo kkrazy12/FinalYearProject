@@ -76,11 +76,11 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
   let compatibilityPercentage = ((totalElements - incompatibleElements) / totalElements) * 100;
   let compatibilityText = "";
   if (compatibilityPercentage >= 70) {
-    compatibilityText = "AG is likely to work well on this website.";
+    compatibilityText = "OptiTone is likely to work well on this website.";
   } else if (compatibilityPercentage >= 50) {
     compatibilityText = "There are some elements on this page AG may not work with.";
   } else {
-    compatibilityText = "AG will not work properly on this page.";
+    compatibilityText = "OptiTone will not work properly on this page.";
   }
 
   //send message to update compatibility text
