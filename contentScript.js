@@ -78,7 +78,7 @@ function checkStyles(backgroundColour, textColour, buttonColour, linkColour) {
   if (compatibilityPercentage >= 70) {
     compatibilityText = "OptiTone is likely to work well on this website.";
   } else if (compatibilityPercentage >= 50) {
-    compatibilityText = "There are some elements on this page AG may not work with.";
+    compatibilityText = "There are some elements on this page OptiTone may not work with.";
   } else {
     compatibilityText = "OptiTone will not work properly on this page.";
   }
